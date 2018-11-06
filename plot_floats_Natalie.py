@@ -19,14 +19,14 @@ import cm
 sys.path.append('/home/irosso/gsw-3.0.3')
 import gsw
     
-HOMEdir     = '/data/irosso'
-plotdir     = os.path.join(HOMEdir,'plots/floats')
+HOMEdir     = my_path
+plotdir     = os.path.join(HOMEdir,'plots')
 
-folder      = os.path.join(HOMEdir,'SOCCOM_floats_DP')
+folder      = os.path.join(HOMEdir,my_folder)
 files       = [f for f in os.listdir(folder) if 'QC' in f]
 files.sort()
  
-ETOPO       = '/data/irosso/ETOPO/ETOPO1_Ice_g_gmt4.grd'
+ETOPO       = 'ETOPO1_Ice_g_gmt4.grd'
 data        = nc.Dataset(ETOPO)
 XC          = data.variables['x'][:]
 YC          = data.variables['y'][:]
@@ -121,7 +121,7 @@ def plot_Orsi(fig,ax,c):
 	return fig
 #----------------------------------------------------
 def plot_PF(fig,ax,c):
-	file = '/data/irosso/PolarFront/Polar_Front_weekly_NFreeman.nc'
+	file = 'Polar_Front_weekly_NFreeman.nc'
 	data = nc.Dataset(file)
 	PF   = data.variables['PFw'][:]
 	long = data.variables['longitude'][:]
@@ -199,7 +199,7 @@ def plot_map_seas(fig,ax,lon,lat,mm,saveFig):
 		#ax.text(326, -67, 'Warm', fontsize=14)
 		#cbar.ax.set_xticklabels([''])
 	if saveFig:
-		outfile = os.path.join(plotdir,'DP_SOCCOM_floats_traj_seasons_v2.png')
+		outfile = os.path.join(plotdir,'floats_traj_seasons.png')
 		print outfile
 		plt.savefig(outfile, bbox_inches='tight',dpi=200)
 		
@@ -268,7 +268,7 @@ def plot_map_ff(figN,lon,lat,ff,saveFig,level,field):
 		cbar.ax.set_xlabel(r'%s %s' %(lab,unit))
 		cbar.set_ticks(np.linspace(lim1,lim2,6))
 		ax.set_title(r'%s %s' %(tt,lab))
-		outfile = os.path.join(plotdir,'DP_SOCCOM_floats_traj_%s_%s.png' %(field,level))
+		outfile = os.path.join(plotdir,'traj_%s_%s.png' %(field,level))
 		print outfile
 		plt.savefig(outfile, bbox_inches='tight',dpi=200)
 		#plt.close()
@@ -331,7 +331,7 @@ def plot_section(press_pre,Nprof,PT_pre,SP_pre,NO3_pre):
 		ax.set_title('%s' %tit[jj])
 	plt.suptitle('Float #%s' %(floatN))
 
-	outfile = os.path.join(plotdir,'DP_SOCCOM_float_%s_section.png' %floatN)
+	outfile = os.path.join(plotdir,'%s_section.png' %floatN)
 	print outfile
 	plt.savefig(outfile, bbox_inches='tight',dpi=200)
 #----------------------------------------------------
@@ -424,7 +424,7 @@ def plot_depth_stat(field,PP,month,deep,season):
 		ax[ii].set_xlabel('%s' %units[ii],fontsize=14)		
 		ax[ii].grid('on')
 		
-	outfile = os.path.join(plotdir,'DP_SOCCOM_floats_depth_stat_%s_%s.png' %(lab1,lab2))
+	outfile = os.path.join(plotdir,'depth_stat_%s_%s.png' %(lab1,lab2))
 	print outfile
 	plt.savefig(outfile, bbox_inches='tight',dpi=200)
 	plt.close()
@@ -721,7 +721,7 @@ if __name__ == "__main__":
 				axx[fidx].set_ylabel('%s %s' %(tit[fidx],units[fidx]),fontsize=14)
 				#ax.set_xlabel('N',fontsize=14)
 
-			outfile = os.path.join(plotdir,'DP_SOCCOM_floats_corr_depths_%s.png' %(floatN))
+			outfile = os.path.join(plotdir,'corr_depths_%s.png' %(floatN))
 			print outfile
 			plt.savefig(outfile, bbox_inches='tight',dpi=200)
 		
@@ -764,23 +764,10 @@ if __name__ == "__main__":
 					cbar.ax.set_xlabel(r'MLD [m]',fontsize=14)
 					#cbar.ax.set_title(r'MLD')
 					cbar.set_ticks(np.linspace(0,200,6))
-					outfile = os.path.join(plotdir,'DP_SOCCOM_floats_corr_prop.png')
+					outfile = os.path.join(plotdir,'corr_prop.png')
 					print outfile
 					plt.savefig(outfile, bbox_inches='tight',dpi=200)
 			
-		"""
-		# check staggered profiles
-		f1 = sigma0[:,0]
-		for ii in range(len(Nprof)):
-			plt.plot(f1,press_pre[:,ii],linewidth=0.3)
-			plt.scatter(f1[KKmld[ii]],press_pre[KKmld[ii],ii],s=50,alpha=0.5)
-			f1 = np.nanmax(f1)+sigma0[:,ii]
-		ax = plt.gca()
-		ax.invert_yaxis()
-		ax.set_ylim(500,0)
-		ax.set_xlim(0,np.nanmax(f1))
-		plt.show()
-		"""
 
 ###### correlation coefficients boxplot ##### 
 ## original, no seasons:
@@ -826,7 +813,7 @@ fig = plt.figure(figsize=(15,10))
 		elif iT == 0:
 			ax[iT].set_ylabel('pressure [db]',fontsize=14)
 
-outfile = os.path.join(plotdir,'DP_SOCCOM_floats_boxplot_prop.png')
+outfile = os.path.join(plotdir,'boxplot_prop.png')
 print outfile
 plt.savefig(outfile, bbox_inches='tight',dpi=200)^I
 
@@ -879,7 +866,7 @@ for id in range(2):
 			if iT == 0:
 				ax[iT].set_ylabel('pressure [db]',fontsize=14)
 	
-outfile = os.path.join(plotdir,'DP_SOCCOM_floats_boxplot_prop.png')
+outfile = os.path.join(plotdir,'boxplot_prop.png')
 print outfile
 plt.savefig(outfile, bbox_inches='tight',dpi=200)	
 	
