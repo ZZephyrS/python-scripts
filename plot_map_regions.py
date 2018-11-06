@@ -26,8 +26,8 @@ plt_net      = True
 net_fig      = True
 onlyReg      = False
 
-HOMEdir      = '/data/irosso'
-plotdir      = os.path.join(HOMEdir,'plots/BSOSE')
+HOMEdir       '/data/irosso'
+plotdir      = os.path.join(HOMEdir,'plots')
 SOSEdir      = '/data/soccom'
 
 grid3        = 'GRID_3'
@@ -82,7 +82,6 @@ pattern      = [None,'|','x']
 
 tit          = ['Subtropical Region', 'ACC', 'Antarctic Region']
 
-#xlabels      = ['TEND', 'DIFF', 'BIO', 'DILUT', 'F$_{CO_2}$', 'ADV','ADV$_h$','ADV$_z$']
 xlabels      = ['DIC tendency', 'diffusion', 'biology', 'dilution', 'air-sea CO$_2$ flux', 'advection','horizontal advection','vertical advection']
 
 NET_DIC      = np.zeros((3,8),'>f4')
