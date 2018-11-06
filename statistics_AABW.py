@@ -11,9 +11,8 @@ ylimN     = -25.
 yIni      = -25.
 yFin      = -80.
 
-maindir   = '/data/irosso'
-folder    = '/data/irosso/data/Octopus/AABW/BACKWARD/10DAYS/glued'
-plotdir   = '/data/irosso/plots/lagrangians/AABW'
+folder    = 'glued'
+plotdir   = 'plots'
 
 # 3D files
 file_lon3D= os.path.join(folder,'lon3D_%s.data' %(case))
@@ -35,7 +34,7 @@ files     = [f for f in os.listdir(folder) if f.startswith('%s' %(casenames)) an
 files.sort()
 
 res       = 6
-grid      = '/data/mmazloff/SOSE/ITERS/SO6_Iter100'
+grid      = 'SO6_Iter100'
 
 cmap      = plt.cm.jet
 cmaplist  = [cmap(i) for i in range(cmap.N)]
