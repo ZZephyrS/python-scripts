@@ -10,6 +10,6 @@ Few useful libraries that I use in the scripts:
 
 3) Cmocean is found also in Palettable (https://jiffyclub.github.io/palettable/), which contains different and very cool colormaps (I really like colorbrewer, from http://colorbrewer2.org).
 
-I usually install all the libraries using Anaconda: 
+(For installing the libraries using Anaconda: 
 
-e.g. Palettable:  conda install -c conda-forge palettable 
+e.g. Palettable:  conda install -c conda-forge palettable  )
