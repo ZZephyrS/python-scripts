@@ -1,6 +1,6 @@
 # python-useful
 
-Collection of some useful scripts I created for analyze model output (MITgcm and Lagrangian particle-tracking models) and data (from hydrographic sections, underway data, LADCP data and profiling core and biogeochemical Argo floats). 
+Collection of some useful scripts I created for analyze model output (MITgcm and Lagrangian particle-tracking models) and data (from hydrographic sections, underway data, LADCP data and profiling core and biogeochemical Argo floats)... or just for fun. 
 
 Few useful libraries that I use in the scripts:
 
