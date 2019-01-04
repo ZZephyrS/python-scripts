@@ -1,40 +1,27 @@
-import os
-import sys
-import mds
-import datetime
+import os, sys, mds
 
 import numpy as np
 import matplotlib as matp
-import scipy.signal as sig
 import matplotlib.colors as col
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-import matplotlib as dates
 
-from matplotlib.lines import Line2D
 from scipy.io import loadmat
-from numpy import linalg as la
-from scipy import fftpack
-from scipy.signal import periodogram,detrend
-from time import clock
 #from mpl_toolkits.basemap import Basemap
-from datetime import date
-from matplotlib import dates
-from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
 plt_net      = True
 net_fig      = True
 onlyReg      = False
 
-HOMEdir       '/data/irosso'
-plotdir      = os.path.join(HOMEdir,'plots')
-SOSEdir      = '/data/soccom'
+HOMEdir      = # plot directory
+local        = # local directory
+SOSEdir      = # data directory
 
+plotdir      = os.path.join(HOMEdir,'plots')
+
+# 1/3 res grid
 grid3        = 'GRID_3'
 griddir      = os.path.join(SOSEdir,grid3)
 grid_file    = os.path.join(griddir, 'grid.mat')
-
-local        = '/data/irosso/data/BSOSE'
 
 DXC          = loadmat(grid_file)['DXC'].transpose()
 DYC          = loadmat(grid_file)['DYC'].transpose()
@@ -63,6 +50,7 @@ print YC[0,0],YC[-1,0]
 # land indexes
 [topo_y, topo_x] = np.where(bathy==0.)
 
+# array for plotting
 v0           = np.linspace(0,0,1)
 
 # text
@@ -86,18 +74,11 @@ xlabels      = ['DIC tendency', 'diffusion', 'biology', 'dilution', 'air-sea CO$
 
 NET_DIC      = np.zeros((3,8),'>f4')
 
-
+# results from somewhere else
 NET_DIC[0,:] = [0.177379, 0.077144, -0.178062, 0.131912, 0.153438, -0.084196, 1.062427, -1.060959]
 NET_DIC[1,:] = [0.026254, 0.025952, -0.194623, -0.046864, 0.030353, 0.185483, -2.402074, 2.336971]
 NET_DIC[2,:] = [0.063670, 0.000456, -0.112979, -0.017764, 0.057283, 0.136218, -5.774339, 5.496866]
 
-"""
-# SO3 
-NET_DIC[0,:] = [0.157585,0.079130,-0.084367,0.095727,0.198832,-0.210869,2.569190,-2.785992]
-NET_DIC[1,:] = [0.279157,0.021293,-0.108969,-0.156294,0.112788,0.389047,-5.269756,5.650727]
-NET_DIC[2,:] = [0.106297,-0.001838,-0.055708,-0.039740,0.095989,0.109432,-4.703841,4.806846]
-"""
-print dom 
 if onlyReg:
     fig     = plt.figure(1,frameon=False,figsize=(15,5))
 else:
@@ -111,6 +92,7 @@ plt.contour(XC[0,:],YC[:,0],bathy,v0,colors='k',origin='lower')
 
 for domain in dom:
     if domain == 'WS':
+        # some coordinates, saved as int32, with shape leny*lex
         file         = os.path.join(local,'WScoord.data')
         Rcoord       = np.fromfile(file,'int32')
         Rcoord       = np.reshape(Rcoord,(leny,lenx))
